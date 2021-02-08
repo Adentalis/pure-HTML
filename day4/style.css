@@ -1,0 +1,24 @@
+section {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  align-content: stretch;
+}
+
+h1 {
+  border: 1px solid red;
+  animation: changeColor 5s linear infinite;
+}
+
+@keyframes changeColor {
+  0% {
+    transform: scale(1);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: scale(5);
+    transform: rotate(360deg);
+  }
+}
