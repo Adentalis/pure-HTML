@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CHART JS TEST</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="statistics">
+      <div id="attempts">Attempts:</div>
+      <div id="avgMemo">Average Memo Time:</div>
+      <div id="avgSuccess">Average Success Time:</div>
+      <div id="avgFail">Average Fail Time:</div>
+    </div>
+  </body>
+  <script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var attempts = document.getElementById("attempts");
+    var avgMemo = document.getElementById("avgMemo");
+    var avgSuccess = document.getElementById("avgSuccess");
+    var avgFail = document.getElementById("avgFail");
+
+    var executionCounter = 1;
+    var labels = Array.from({ length: executionCounter }, (_, i) => i + 1);
+    var memoTimes = [238];
+    var solveTimes = [137];
+    var failTimes = [0];
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Memotime",
+          backgroundColor: "#0353a4",
+          data: memoTimes,
+        },
+        {
+          label: "Success Solve",
+          backgroundColor: "#32CD32",
+          data: solveTimes,
+        },
+        {
+          label: "Fail Solve",
+          backgroundColor: "#DC143C",
+          data: failTimes,
+        },
+      ],
+    };
+
+    const options = {
+      scales: {
+        yAxes: [{ stacked: true }],
+        xAxes: [
+          {
+            stacked: true,
+          },
+        ],
+      },
+    };
+
+    const chart = new Chart(ctx, {
+      type: "bar",
+      data: data,
+      options: options,
+    });
+
+    // calculations for statistics
+    let avgMemoValue = memoTimes.reduce((a, b) => a + b, 0) / memoTimes.length;
+
+    let avgSuccessValue = solveTimes.filter((value) => value != 0);
+    let successCounter = avgSuccessValue.length;
+    avgSuccessValue =
+      avgSuccessValue.reduce((a, b) => a + b, 0) / avgSuccessValue.length;
+
+    let avgFailValue = failTimes.filter((value) => value != 0);
+    let failCounter = avgFailValue.length;
+
+    avgFailValue =
+      avgFailValue.reduce((a, b) => a + b, 0) / avgFailValue.length;
+
+    let successRate = Math.round((successCounter / executionCounter) * 100);
+
+    // render statistics
+    attempts.innerHTML =
+      "Attempts " +
+      executionCounter +
+      " - " +
+      " Solved: " +
+      successCounter +
+      " Failed: " +
+      failCounter +
+      " --> Succesrate:" +
+      successRate +
+      "%";
+    avgMemo.innerHTML = "Average Memo Time: " + avgMemoValue;
+    avgSuccess.innerHTML = "Average Success Time: " + avgSuccessValue;
+    avgFail.innerHTML = "Average Fail Time: " + avgFailValue;
+  </script>
+</html>
