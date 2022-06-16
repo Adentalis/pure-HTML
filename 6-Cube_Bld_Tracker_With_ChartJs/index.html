@@ -27,11 +27,11 @@
     var avgSuccess = document.getElementById("avgSuccess");
     var avgFail = document.getElementById("avgFail");
 
-    var executionCounter = 2;
+    var executionCounter = 3;
     var labels = Array.from({ length: executionCounter }, (_, i) => i + 1);
-    var memoTimes = [238, 270];
-    var solveTimes = [137, 95];
-    var failTimes = [0, 0];
+    var memoTimes = [238, 270, 188];
+    var solveTimes = [137, 95, 0];
+    var failTimes = [0, 0, 137];
 
     const data = {
       labels: labels,
