@@ -1,0 +1,17 @@
+section {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  align-content: stretch;
+}
+ul li {
+  display: inline-table;
+  margin: 5vh;
+}
+
+#set-btn {
+  position: relative;
+  display: flex;
+}
